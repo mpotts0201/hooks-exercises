@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { FetchExample, TimerExample } from './components';
 
 function App() {
+  const [selected, setSelected] = useState<string>('FetchExample');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={styles.appContainer}>
+      <div>
+        <button
+          style={{ backgroundColor: selected === 'FetchExample' ? '#42eff5' : 'white' }}
+          onClick={() => setSelected('FetchExample')}
         >
-          Learn React
-        </a>
-      </header>
+          Fetch Example
+        </button>
+        <button
+          style={{ backgroundColor: selected === 'TimerExample' ? '#42eff5' : 'white' }}
+          onClick={() => setSelected('TimerExample')}
+        >
+          Timer Example
+        </button>
+      </div>
+      <div>
+        {selected === 'FetchExample' ? <FetchExample /> : null}
+        {selected === 'TimerExample' ? <TimerExample /> : null}
+      </div>
     </div>
   );
 }
+
+const styles = {
+  appContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column' as 'column',
+  }
+};
 
 export default App;
